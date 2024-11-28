@@ -1,4 +1,4 @@
-package com.min.app01.pkg01;
+package com.min.app01.pkg01_setter;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -10,7 +10,7 @@ public class MainClass {
     // GenericXmlApplicationContext 클래스
     // XML로 생성된 bean을 관리하는 클래스
     
-    AbstractApplicationContext ctx = new GenericXmlApplicationContext("pkg01/app-context.xml");
+    AbstractApplicationContext ctx = new GenericXmlApplicationContext("pkg01_setter/app-context.xml");
     
     Contact c = ctx.getBean("contactBean", Contact.class);  // Contact c = (Contact) ctx.getBean("contactBean");
     System.out.println(c.getMobile());

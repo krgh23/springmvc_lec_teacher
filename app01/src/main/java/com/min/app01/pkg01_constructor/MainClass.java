@@ -1,4 +1,4 @@
-package com.min.app01.pkg02;
+package com.min.app01.pkg01_constructor;
 
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -7,7 +7,7 @@ public class MainClass {
 
   public static void main(String[] args) {
     
-    AbstractApplicationContext ctx = new GenericXmlApplicationContext("pkg02/appCtx.xml");
+    AbstractApplicationContext ctx = new GenericXmlApplicationContext("pkg01_constructor/appCtx.xml");
     
     Contact c = ctx.getBean("contactBean", Contact.class);
     System.out.println(c.getMobile());

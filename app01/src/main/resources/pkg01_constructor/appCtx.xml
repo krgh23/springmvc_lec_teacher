@@ -10,14 +10,14 @@
   
   <!-- constructor-arg 태그 : 생성자를 이용해 값을 전달하는 태그 -->
   
-  <bean id="contactBean" class="com.min.app01.pkg02.Contact" scope="singleton">
+  <bean id="contactBean" class="com.min.app01.pkg01_constructor.Contact" scope="singleton">
     <constructor-arg>
       <value>010-1111-1111</value>
     </constructor-arg>
     <constructor-arg value="user@min.com" />
   </bean>
   
-  <bean id="personBean" class="com.min.app01.pkg02.Person" scope="singleton">
+  <bean id="personBean" class="com.min.app01.pkg01_constructor.Person" scope="singleton">
     <constructor-arg value="유저" />
     <constructor-arg ref="contactBean" />
   </bean>
