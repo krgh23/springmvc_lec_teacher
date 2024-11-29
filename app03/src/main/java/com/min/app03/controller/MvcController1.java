@@ -3,6 +3,7 @@ package com.min.app03.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller  // 나는 요청과 응답을 처리하는 컨트롤러 입니다.
 public class MvcController1 {
@@ -11,8 +12,8 @@ public class MvcController1 {
   /*
    * 반환타입
    *   1) String       : 사용자에게 보여 줄 (응답할) JSP 의 경로와 이름을 작성합니다.
-   *   2) void
-   *   3) ModelAndView
+   *   2) void         : 요청한 주소를 JSP 경로와 이름으로 인식합니다.
+   *   3) ModelAndView : 
    *   4) ...
    * 
    * 메소드명
@@ -38,7 +39,7 @@ public class MvcController1 {
    *   3) value={"/list", "/list.do"} : 2개 이상의 요청을 의미합니다.  http://127.0.0.1:8080/app03/list
    *                                                                   http://127.0.0.1:8080/app03/list.do
    * 3. 요청 메소드 (method)
-   *   1) method=RequestMethod.GET  : GET 방식을 의미합니다.
+   *   1) method=RequestMethod.GET  : GET 방식을 의미합니다. (디폴트)
    *   2) method=RequestMethod.POST : POST 방식을 의미합니다.
    */
   
@@ -57,10 +58,20 @@ public class MvcController1 {
      */
   }
   
+  @RequestMapping(value="/webdir1/list", method=RequestMethod.GET)
+  public void letsgo() {
+    // 반환타입이 void 이므로 요청 주소 "/webdir1/list" 를 사용자에게 보여 줄 JSP 경로와 이름으로 해석합니다.
+    // ViewResolver 에 의해서 최종 경로는 "/WEB-INF/views/webdir1/list.jsp" 가 됩니다.
+  }
   
-  
-  
-  
-  
+  @RequestMapping(value="/board/view")  // method 를 생략하면 GET 방식으로 동작합니다.
+  public ModelAndView gogogo() {
+    
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("webdir1/detail");  // 사용자에게 보여줄 JSP 의 경로와 이름입니다. ViewResolver 에 의해 처리됩니다.
+    mav.addObject("number", 10);        // JSP 로 number = 10 이라는 값을 전달합니다.
+    return mav;
+    
+  }
   
 }
