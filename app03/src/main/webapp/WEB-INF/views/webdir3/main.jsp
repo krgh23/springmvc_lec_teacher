@@ -33,6 +33,10 @@
     <a href="<%=request.getContextPath()%>/webdir3/req1">요청1</a>
     <br/>
     <a href="<%=request.getContextPath()%>/webdir3/req2?sort=ASC&page=1">요청2</a>
+    <br/>
+    <a href="<%=request.getContextPath()%>/webdir3/req3?flowers=ROSE&flowers=TULIP">요청3</a>
+    <br/>
+    <a href="<%=request.getContextPath()%>/webdir3/req4">요청4</a>
   </div>
   
   
