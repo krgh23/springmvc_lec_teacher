@@ -44,8 +44,17 @@ public class MvcController1 {
   
   @RequestMapping(value="/", method=RequestMethod.GET)
   public String welcome() {
-    System.out.println("welcome");
-    return "index";
+    return "webdir1/index";  // return "/webdir1/index" 로 작성해도 스프링이 올바르게 해석해 줍니다.
+    /*
+     * return "webdir1/index"; 해석해 보기
+     * 
+     * 1. 리턴 값 "webdir1/index" 는 ViewResolver 에게 전달됩니다.
+     *    (DispatcherServlet : servlet-context.xml 에 ViewResolver 가 정의되어 있습니다.)
+     * 2. ViewResolver 는 "webdir1/index" 앞에 "/WEB-INF/views/" 문자열을 추가합니다. (prefix)
+     * 3. ViewResolver 는 "webdir1/index" 뒤에 ".jsp" 문자열을 추가합니다. (suffix)
+     * 4. ViewResolver 는 완성된 최종 View 로 이동합니다.
+     *    (최종 View 의 모습 : "/WEB-INF/views/webdir1/index.jsp") 
+     */
   }
   
   
