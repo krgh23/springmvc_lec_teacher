@@ -20,7 +20,27 @@ public class MvcController5 {
     System.out.println(param);
     
     return "webdir5/main";
-     
+    
+  }
+  
+  @RequestMapping(value="/webdir5/req2")
+  public String req2(HttpServletRequest request) {
+    
+    String param = request.getParameter("param");
+    System.out.println(param);
+    
+    return "webdir5/main";
+    
+  }
+  
+  @RequestMapping(value="/webdir5/req3")
+  public String req3(HttpServletRequest request) {
+    
+    String param = request.getParameter("param");
+    System.out.println(param);
+    
+    return "webdir5/main";
+    
   }
   
 }

@@ -17,9 +17,41 @@
       
       // Java 변수는 JavaScript 내부에서 사용할 수 있습니다. (하지만 반대는 안 됩니다.)
       const contextPath = '<%=request.getContextPath()%>';
-      location.href = contextPath + '/webdir5/req1?param=' + event.currentTarget.textContent;  // 클릭한 요소(event.currentTarget)의 내부 텍스트(textContent)
       
-    }); 
+      // JSP 에서는 템플릿 문자열(Template Strings)을 사용할 때 \${} 를 사용합니다.
+      location.href = `\${contextPath}/webdir5/req1?param=\${event.currentTarget.textContent}`;  // 클릭한 요소(event.currentTarget)의 내부 텍스트(textContent)
+      
+    });
+    
+    const btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', (event) => {
+      
+      // data- 속성(Attribute)의 값은 dataset 속성(Property)에 저장됩니다.
+      
+      const contextPath = '<%=request.getContextPath()%>';
+      location.href = `\${contextPath}/webdir5/req2?param=\${event.currentTarget.dataset.id}`;
+      
+    });
+    
+    const btnDo = document.getElementsByClassName('btn-do');
+    for(const btn of btnDo) {
+      btn.addEventListener('click', (event) => {
+        
+        // Node    : Element, Text 등을 지칭하는 상위 개념의 DOM 객체입니다.
+        // Element : 한 마디로 태그(HTMLElement)를 의미하는 Node 의 하위 개념 DOM 객체입니다.
+        
+        // 같은 레벨의 요소(Element)를 '형제 (Sibling) 관계'라고 합니다.
+        // 이전 형제 요소(Element)를 previousElementSibling 이라고 하고, 다음 형제 요소를 nextElementSibling 이라고 합니다.
+        
+        // value 속성(Attribute)은 value 속성(Property)과 같습니다.
+        
+        const contextPath = '<%=request.getContextPath()%>';
+        // console.log(event.currentTarget.nextElementSibling);
+        location.href = `\${contextPath}/webdir5/req3?param=\${event.currentTarget.nextElementSibling.value}`;
+        
+      })
+      
+    }
   
   }
   
@@ -30,9 +62,15 @@
   <%-- 요청 만들기 3 : JavaScript 의 Location 객체 활용하기 (<a> 태그와 동일한 요청입니다.) --%>
   
   <button type="button" id="btn1">요청1</button>
+  <br/>
   
+  <button type="button" id="btn2" data-id="1">요청2</button>
+  <br/>
   
-  
+  <button type="button" class="btn-do">요청Do1</button>
+  <input type="hidden" value="1"><br/>
+  <button type="button" class="btn-do">요청Do2</button>
+  <input type="hidden" value="2"><br/>
 
 </body>
 </html>
