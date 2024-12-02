@@ -8,5 +8,10 @@
 </head>
 <body>
 
+  <a href="<%=request.getContextPath()%>/webdir6/123">경로변수1</a>
+  <br/>
+  <a href="<%=request.getContextPath()%>/webdir6/sort/ASC/page/1">경로변수2</a>
+  <br/>
+
 </body>
 </html>
