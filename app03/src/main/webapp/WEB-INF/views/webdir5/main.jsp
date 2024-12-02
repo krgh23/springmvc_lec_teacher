@@ -19,7 +19,7 @@
       const contextPath = '<%=request.getContextPath()%>';
       location.href = contextPath + '/webdir5/req1?param=' + event.currentTarget.textContent;  // 클릭한 요소(event.currentTarget)의 내부 텍스트(textContent)
       
-    });
+    }); 
   
   }
   
