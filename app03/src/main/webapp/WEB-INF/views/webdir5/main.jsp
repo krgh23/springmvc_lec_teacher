@@ -52,7 +52,26 @@
       })
       
     }
+    
+    const btns = document.getElementsByClassName('btns');
+    for(const btn of btns) {
+      btn.addEventListener('click', (event) => {
+        
+        // 부모 노드(Node)    : parentNode
+        // 부모 요소(Element) : parentElement
+        
+        const contextPath = '<%=request.getContextPath()%>';
+        location.href = `\${contextPath}/webdir5/req4?param=\${event.currentTarget.parentElement.dataset.no}`;
+        
+      })
+    }
+    
   
+  }  // end onload
+  
+  function fnMove(anchor) {  // anchor 는 클릭한 <a> 태그 요소를 의미합니다.
+    alert('이동합니다.');
+    location.href = anchor.dataset.url;
   }
   
 </script>
@@ -71,6 +90,19 @@
   <input type="hidden" value="1"><br/>
   <button type="button" class="btn-do">요청Do2</button>
   <input type="hidden" value="2"><br/>
+  
+  <div data-no="1">
+    <button type="button" class="btns">요청하기1</button>
+  </div>
+  <div data-no="2">
+    <button type="button" class="btns">요청하기2</button>
+  </div>
+  <br/>
+  
+  <%-- <a> 태그를 클릭하면 JavaScript 의 fnMove() 함수가 호출됩니다. --%>
+  <%-- this : 클릭한 요소를 의미합니다. 어떤 <a> 태그를 클릭했는지 함수에 인자로 전달합니다. --%>
+  <a onclick="fnMove(this)" data-url="https://www.naver.com">네이버</a><br/>
+  <a onclick="fnMove(this)" data-url="https://www.kakao.com">카카오</a><br/>
 
 </body>
 </html>
