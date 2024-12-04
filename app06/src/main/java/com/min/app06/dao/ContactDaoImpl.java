@@ -14,7 +14,7 @@ import com.min.app06.dto.ContactDto;
 
 /*
  * JDBC
- * 1. Java DataBase Connection
+ * 1. Java DataBase Connectivity
  * 2. Java에서 DataBase에 접근할 수 있도록 해 주는 Programming API
  * 3. WebApplication - JDBC Interface - MySQL JDBC Driver - MySQL DBMS
  *        app06      - ContactDaoImpl - mysql-connector-j - MySQL Server
