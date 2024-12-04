@@ -40,6 +40,7 @@ class ContactTest {
    * 3. 메소드명 : 자유롭게 사용합니다. (한글 사용도 무방합니다.)
    * 4. 매개변수 : 없습니다.
    */
+  
   @Test
   void 접속테스트() {
     contactDao.getContactList();
