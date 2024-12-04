@@ -42,8 +42,31 @@ class ContactTest {
    */
   
   @Test
-  void 접속테스트() {
-    contactDao.getContactList();
+  void 목록테스트() {
+    
+    // 목록의 첫 번째 요소의 last_name이 james이면 통과입니다.
+    // assertEquals("james", contactDao.getContactList().get(0).getLast_name());
+    
+    // 목록의 개수가 3개이면 통과입니다.
+    assertEquals(3, contactDao.getContactList().size());
+    
   }
 
+  @Test
+  void 상세테스트() {
+    
+    // contact_id = 3인 행의 first_name이 jordan인지 확인하기
+    int contact_id = 3;
+    assertEquals("jordan", contactDao.getContactById(contact_id).getFirst_name());
+    
+  }
+  
+  @Test
+  void 전체행개수테스트() {
+    
+    // 전체 행 개수가 3개이면 통과
+    assertEquals(3, contactDao.getContactCount());
+    
+  }
+  
 }

@@ -1,8 +1,10 @@
 package com.min.app06.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,23 +41,102 @@ public class ContactDaoImpl implements IContactDao {
   
   @Override
   public List<ContactDto> getContactList() {
+    // SELECT 결과 목록을 저장할 List입니다.
+    List<ContactDto> contacts = new ArrayList<ContactDto>();
+    // 데이터베이스에 접속합니다.
     conn = jdbcConnection.getConnection();
+    try {
+      // 실행할 쿼리문입니다.
+      String sql = "SELECT contact_id, last_name, first_name, email, mobile, create_dt FROM tbl_contact";
+      // 쿼리문을 실행할 PreparedStatement 객체를 만드는 방법입니다.
+      ps = conn.prepareStatement(sql);
+      // SELECT 쿼리를 실행하는 방법입니다.
+      rs = ps.executeQuery();
+      // SELECT 결과 행(Row)이 있으면 순서대로 하나씩 반복합니다.
+      while(rs.next()) {
+        // 결과 행(Row)의 각 열(Column) 값을 가져옵니다.
+        int contact_id = rs.getInt("contact_id");
+        String last_name = rs.getString("last_name");
+        String first_name = rs.getString("first_name");
+        String email = rs.getString("email");
+        String mobile = rs.getString("mobile");
+        Date create_dt = rs.getDate("create_dt");
+        // 각 열(Column)의 값을 ContactDto 객체로 만듭니다.
+        // @Builder(빌더 패턴)을 이용해 보겠습니다.
+        ContactDto contactDto = ContactDto.builder()
+                                  .contact_id(contact_id)
+                                  .last_name(last_name)
+                                  .first_name(first_name)
+                                  .email(email)
+                                  .mobile(mobile)
+                                  .create_dt(create_dt)
+                                  .build();
+        // 완성된 ContactDto 객체를 List에 저장합니다.
+        contacts.add(contactDto);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    // 사용한 자원을 반납합니다.
     jdbcConnection.close(conn, ps, rs);
-    return null;
+    // SELECT 결과 목록을 반환합니다.
+    return contacts;
   }
 
   @Override
   public ContactDto getContactById(int contact_id) {
+    // 결과 행 1개를 저장할 ContactDto 객체를 만듭니다. 결과 행이 없을수도 있으므로 null 값을 초기화로 줍니다. (선언만 합니다.)
+    ContactDto contactDto = null;
+    // 데이터베이스에 접속합니다.
     conn = jdbcConnection.getConnection();
+    try {
+      // 실행할 쿼리문을 가장 먼저 만들어야 합니다.
+      String sql = "SELECT contact_id, last_name, first_name, email, mobile, create_dt FROM tbl_contact WHERE contact_id = ?";
+      // PreparedStatement 객체를 만듭니다.
+      ps = conn.prepareStatement(sql);
+      // 쿼리문에 물음표(위치 홀더)가 존재하면 해당 위치에 값을 전달해야 합니다.
+      // 각 물음표(위치 홀더)의 구분은 숫자로 합니다. 첫 번째 물음표의 위치는 1입니다.
+      ps.setInt(1, contact_id);  // 첫 번째 물음표(위치 홀더)에 contact_id 를 전달합니다.
+      // 쿼리문을 실행하고 결과를 ResultSet으로 받습니다.
+      rs = ps.executeQuery();
+      // 결과 행은 0 또는 1개이므로 if문으로 결과 행의 존재 여부를 파악합니다.
+      if(rs.next()) {
+        // 결과 행(Row)의 각 열(Column) 값을 가져와서 ContactDto 객체로 만듭니다.
+        // @Builder(빌더 패턴)을 이용해 보겠습니다.
+        contactDto = ContactDto.builder()
+                        .contact_id(rs.getInt("contact_id"))
+                        .last_name(rs.getString("last_name"))
+                        .first_name(rs.getString("first_name"))
+                        .email(rs.getString("email"))
+                        .mobile(rs.getString("mobile"))
+                        .create_dt(rs.getDate("create_dt"))
+                        .build();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    // 사용한 자원을 반납합니다.
     jdbcConnection.close(conn, ps, rs);
-    return null;
+    // 결과 행 1개를 저장한 ContactDto 객체를 반환합니다.
+    return contactDto;
   }
 
   @Override
   public int getContactCount() {
+    int amount = 0;
     conn = jdbcConnection.getConnection();
+    try {
+      String sql = "SELECT COUNT(*) AS amount FROM tbl_contact";
+      ps = conn.prepareStatement(sql);
+      rs = ps.executeQuery();
+      if(rs.next()) {
+        amount = rs.getInt("amount");
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     jdbcConnection.close(conn, ps, rs);
-    return 0;
+    return amount;
   }
 
   @Override
