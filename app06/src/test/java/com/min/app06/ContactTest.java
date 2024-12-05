@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.min.app06.dao.IContactDao;
+import com.min.app06.dto.ContactDto;
 
 /*
  * ContactDaoImpl bean을 만드는 방법에 따른 @SpringJUnitConfig 설정 방법
@@ -66,6 +67,50 @@ class ContactTest {
     
     // 전체 행 개수가 3개이면 통과
     assertEquals(3, contactDao.getContactCount());
+    
+  }
+  
+  @Test
+  void 등록테스트() {
+    
+    // 등록할 ContactDto 객체 생성하기
+    ContactDto contactDto = ContactDto.builder()
+                              .last_name("button")
+                              .first_name("tim")
+                              .email("timbutton@gmail.com")
+                              .mobile("010-4444-4444")
+                              .build();
+    
+    // 등록 결과가 1이면 통과
+    assertEquals(1, contactDao.register(contactDto));
+    
+  }
+  
+  @Test
+  void 수정테스트() {
+    
+    // 수정할 정보를 저장한 ContactDto 객체 생성
+    ContactDto contactDto = ContactDto.builder()
+                              .contact_id(1)
+                              .last_name("min")
+                              .first_name("sam")
+                              .email("minsam@gmail.com")
+                              .mobile("010-9999-9999")
+                              .build();
+    
+    // 수정 결과가 1이면 통과
+    assertEquals(1, contactDao.modify(contactDto));
+    
+  }
+  
+  @Test
+  void 삭제테스트() {
+    
+    // 삭제할 contact_id
+    int contact_id = 2;
+    
+    // 삭제 결과가 1이면 통과
+    assertEquals(1, contactDao.remove(contact_id));
     
   }
   
