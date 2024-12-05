@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.min.app06.dto.ContactDto;
 import com.min.app06.service.IContactService;
@@ -45,9 +47,37 @@ public class ContactController {
     return "/contact/detail";
   }
   
+  @RequestMapping(value="/modify.do", method=RequestMethod.POST)
+  public String modify(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    // 요청을 그대로 서비스로 전달하고 수정 성공/실패 메시지를 받아옵니다.
+    String modifyMsg = contactService.modify(request);
+    // 수정 성공/실패 메시지를 RedirectAttributes에 저장합니다. Model에 저장하면 리다이렉트할 때 전달되지 않습니다.
+    redirectAttributes.addFlashAttribute("msg", modifyMsg);
+    // 연락처 목록 보기로 리다이렉트 합니다. 삽입/수정/삭제 이후에는 반드시 리다이렉트 합니다.
+    return "redirect:/contact/list.do";
+  }
   
+  @RequestMapping(value="/remove.do", method=RequestMethod.POST)
+  public String remove(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    // 요청을 삭제 서비스에 전달하고, 삭제 성공/실패 메시지를 받아 옵니다.
+    String removeMsg = contactService.remove(request);
+    // 삭제 성공/실패 메시지를 RedirectAttributes에 저장합니다.
+    redirectAttributes.addFlashAttribute("msg", removeMsg);
+    // 연락처 목록 보기로 리다이렉트합니다.
+    return "redirect:/contact/list.do";
+  }
   
+  @RequestMapping(value="/write.do")
+  public void write() {
+    
+  }
   
-  
-  
+  @RequestMapping(value="/register.do", method=RequestMethod.POST)
+  public String register(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    // 요청을 등록 서비스에 전달한 뒤 등록 성공/실패 메시지를 받아와서 RedirectAttributes 에 저장합니다.
+    redirectAttributes.addFlashAttribute("msg", contactService.register(request));
+    // 목록 보기로 Redirect 합니다.
+    return "redirect:/contact/list.do";
+  }
+
 }
