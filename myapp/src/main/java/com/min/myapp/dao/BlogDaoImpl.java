@@ -47,8 +47,8 @@ public class BlogDaoImpl implements IBlogDao {
             .contents(rs.getString(3))
             .user_email(rs.getString(4))
             .hit(rs.getInt(5))
-            .modify_dt(rs.getDate(6))
-            .create_dt(rs.getDate(7))
+            .modify_dt(rs.getTimestamp(6))
+            .create_dt(rs.getTimestamp(7))
             .build();
         blogList.add(blogDto);
       }
@@ -93,8 +93,8 @@ public class BlogDaoImpl implements IBlogDao {
             .contents(rs.getString(3))
             .user_email(rs.getString(4))
             .hit(rs.getInt(5))
-            .modify_dt(rs.getDate(6))
-            .create_dt(rs.getDate(7))
+            .modify_dt(rs.getTimestamp(6))
+            .create_dt(rs.getTimestamp(7))
             .build();
       }
     } catch (Exception e) {
