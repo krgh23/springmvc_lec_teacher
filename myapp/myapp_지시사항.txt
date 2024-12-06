@@ -10,11 +10,10 @@ artifact id
 src/main/java
   com.min.myapp.controller
     MvcController.java
-    BlogController.java
+    BlogController.java (@RequestParam / 커맨드 객체만 이용하기)
   com.min.myapp.dao
     IBlogDao.java
     BlogDaoImpl.java
-    JdbcConnection.java (가능하면 Dao에 편입하기)
   com.min.myapp.dto
     BlogDto.java
   com.min.myapp.service
