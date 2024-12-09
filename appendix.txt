@@ -1,0 +1,13 @@
+app01
+  IoC Container (Spring Container)
+  bean을 Spring Container에 만들어 두는 방법
+    <bean> 태그, @Configuration @Bean, @Component
+
+app02
+  DI : Dependency Injection
+  Spring Container에 저장된 bean을 가져오는 방법
+    @Autowired를 어디에 적용하느냐?
+      field injection, setter injection, constructor injection
+
+app03
+  
