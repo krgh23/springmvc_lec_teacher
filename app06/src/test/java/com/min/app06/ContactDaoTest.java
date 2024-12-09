@@ -29,7 +29,7 @@ import com.min.app06.dto.ContactDto;
  */
 @SpringJUnitConfig(locations={"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
 
-class ContactTest {
+class ContactDaoTest {
 
   @Autowired                      // 테스트 코드에서는 필드 주입이 적절합니다.
   private IContactDao contactDao; // 인터페이스 구현 클래스는 타입으로 인터페이스를 사용합니다.
