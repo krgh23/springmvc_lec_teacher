@@ -46,7 +46,7 @@
       4) 파라미터가 DTO인 경우
         #{field}
   2. ${parameter}
-    1) 문자열 대체 방식이다. (String Substitution)
+    1) 문자열 대체 방식입니다. (String Substitution)
     2) 전달된 파라미터가 따옴표 또는 이스케이프 처리 없이 그대로 SQL 구문에 포함됩니다.
     3) SQL 구문의 메타 데이터(테이블 이름, 칼럼 이름, 쿼리문 자체 키워드 등)를 처리할 때 사용합니다.
 -->
@@ -74,17 +74,17 @@
         #{요소}
       </foreach>
     2) 예시
-      (1) 파라미터가 배열인 경우 [ String[] flowers = {"모란", "백합", "국화"}; ]
+      (1) 파라미터가 배열인 경우 ::: String[] flowers = {"모란", "백합", "국화"};
         <foreach collection="array" item="flower" open="NAME IN (" close=")" separator=",">
           #{flower}
         </foreach>
         ** 결과 : NAME IN ('모란', '백합', '국화')
-      (2) 파라미터가 List인 경우 [ List<String> flowers = Arrays.asList("모란", "백합", "국화"); ]
+      (2) 파라미터가 List인 경우 ::: List<String> flowers = Arrays.asList("모란", "백합", "국화"); ]
         <foreach collection="list" item="flower" open="(" close=")" separator=",">
           #{flower}
         </foreach>
         ** 결과 : ('모란', '백합', '국화')
-      (3) 파라미터가 배열 또는 리스트를 가진 Map인 경우 [ Map<String, Object> map = Map.of("flowers", Arrays.asList("모란", "백합", "국화")); ]
+      (3) 파라미터가 배열 또는 리스트를 가진 Map인 경우 ::: Map<String, Object> map = Map.of("flowers", Arrays.asList("모란", "백합", "국화")); ]
         <foreach collection="flowers" item="flower" separator=",">
           #{flower}
         </foreach>
