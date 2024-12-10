@@ -70,6 +70,12 @@ public class BoardDaoImpl implements IBoardDao {
   }
   
   @Override
+  public List<BoardDto> selectBoardIntegratedSearch(Map<String, Object> map) {
+    List<BoardDto> list = template.selectList("mybatis.mappers.boardMapper.selectBoardIntegratedSearch", map);
+    return list;
+  }
+  
+  @Override
   public int insertBoard(BoardDto boardDto) {
     int result = template.insert("mybatis.mappers.boardMapper.insertBoard", boardDto);
     return result;
@@ -83,8 +89,14 @@ public class BoardDaoImpl implements IBoardDao {
 
   @Override
   public int deleteBoard(int boardId) {
-    int result = template.delete("mybatis.mappers.boardMapper.deleteBoard", template);
+    int result = template.delete("mybatis.mappers.boardMapper.deleteBoard", boardId);
     return result;
   }
 
+  @Override
+  public int deleteSelectedBoard(int[] numbers) {
+    int result = template.delete("mybatis.mappers.boardMapper.deleteSelectedBoard", numbers);
+    return result;
+  }
+  
 }

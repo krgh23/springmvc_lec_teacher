@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.min.app07.dao.IBoardDao;
+import com.min.app07.dto.BoardDto;
+import com.min.app07.dto.UserDto;
 
 /*
  * IBoardDao 타입의 구현체 BoardDaoImpl bean은 @Repository를 이용해 생성하였으므로 Component Scan이 정의되어 있는 servlet-context.xml 파일이 필요합니다.
@@ -68,10 +70,57 @@ class BoardDaoTest {
     
   }
   
+  @Test
+  void 통합검색테스트() {
+    
+    String title = "";
+    String usrEmail = "@";
+    String usrName = "";
+    String beginDt = "";
+    String endDt = "";
+    Map<String, Object> map = Map.of("title", title, "usrEmail", usrEmail, "usrName", usrName, "beginDt", beginDt, "endDt", endDt);
+    
+    assertEquals(3, boardDao.selectBoardIntegratedSearch(map).size());
+    
+  }
   
+  @Test
+  void 수정테스트() {
+    
+    BoardDto boardDto = new BoardDto();
+    // boardDto.setTitle("20241210_식단(2)");
+    boardDto.setContents("짜장면, 탕수육, 난자완스");
+    boardDto.setBoardId(2);
+    
+    assertEquals(1, boardDao.updateBoard(boardDto));
+    
+  }
   
+  @Test
+  void 선택항목삭제테스트() {
+    
+    int[] numbers = {1, 2, 3};
+    assertEquals(numbers.length, boardDao.deleteSelectedBoard(numbers));
+    
+  }
   
-  
-  
+  @Test
+  void 삽입테스트() {
+    
+    // 삽입 이전 BoardDto 객체는 title, contents, usrId 값을 가집니다.
+    BoardDto boardDto = new BoardDto();
+    boardDto.setTitle("20241212_식단");
+    boardDto.setContents("스시, 냉모밀, 텐동");
+    boardDto.setUserDto(new UserDto(3, null, null));
+    System.out.println("삽입 이전 : " + boardDto);
+    
+    // 삽입
+    assertEquals(1, boardDao.insertBoard(boardDto));
+    
+    // 삽입 이후 BoardDto 객체는 title, contents, usrId, boardId 값을 가집니다.
+    // boardId 값은 매퍼의 <selectKey> 태그가 넣어 준 값입니다.
+    System.out.println("삽입 이후 : " + boardDto);
+    
+  }
   
 }
