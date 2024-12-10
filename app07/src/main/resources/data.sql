@@ -40,5 +40,19 @@ SELECT board_id, title, contents, b.usr_id, usr_email, usr_name, create_dt
  ORDER BY board_id DESC;
 
 
-
+      SELECT
+           board_id
+         , title
+         , contents
+         , create_dt
+         , b.usr_id
+         , usr_email
+         , usr_name
+      FROM
+           tbl_board b INNER JOIN tbl_user u
+        ON
+           b.usr_id = u.usr_id
+     WHERE
+           create_dt >= '2024-12-09'
+       AND create_dt <= '2024-12-10';
 

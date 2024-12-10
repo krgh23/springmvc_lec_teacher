@@ -2,6 +2,8 @@ package com.min.app07;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
@@ -29,8 +31,47 @@ class BoardDaoTest {
     // assertEquals(true, boardDao.selectBoardList().get(1).getContents().startsWith("대방어"));
     
     // 두 번째 항목의 usr_name="james" 인지 테스트
-    assertEquals("james", boardDao.selectBoardList().get(1).getUserDto().getUsrName());
+    String sort = "ASC";
+    assertEquals("james", boardDao.selectBoardList(sort).get(1).getUserDto().getUsrName());
+    
+  }
+  
+  @Test
+  void 상세테스트() {
+    
+    // boardId가 3인 항목의 usr_name="helena" 인지 테스트
+    int boardId = 3;
+    assertEquals("helena", boardDao.selectBoardById(boardId).getUserDto().getUsrName());
     
   }
 
+  @Test
+  void 검색테스트() {
+    
+    // title에 10이 포함되는 항목이 조회되는지 테스트
+    // String query = "10";
+    // assertEquals("20241210_식단", boardDao.selectBoardSearchList(query).get(0).getTitle());
+    
+    // title에 10이 포함되는 항목이 조회되는지 테스트
+    Map<String, Object> map = Map.of("column", "title", "query", "10");
+    assertEquals("20241210_식단", boardDao.selectBoardSearchList(map).get(0).getTitle());
+    
+  }
+  
+  @Test
+  void 기간테스트() {
+    
+    String beginDt = "2024-12-05";
+    String endDt = "2024-12-06";
+    Map<String, Object> map = Map.of("beginDt", beginDt, "endDt", endDt);
+    assertEquals(2, boardDao.selectBoardPeriodList(map).size());
+    
+  }
+  
+  
+  
+  
+  
+  
+  
 }
