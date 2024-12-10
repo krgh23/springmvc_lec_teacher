@@ -24,8 +24,13 @@ class BoardDaoTest {
   
   @Test
   void 목록테스트() {
+    
     // 두 번째 항목의 contents="대방어, 광어, 우럭 매운탕" 인지 테스트
-    assertEquals(true, boardDao.selectBoardList().get(1).getContents().startsWith("대방어"));
+    // assertEquals(true, boardDao.selectBoardList().get(1).getContents().startsWith("대방어"));
+    
+    // 두 번째 항목의 usr_name="james" 인지 테스트
+    assertEquals("james", boardDao.selectBoardList().get(1).getUserDto().getUsrName());
+    
   }
 
 }

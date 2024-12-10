@@ -53,15 +53,34 @@
 
 <mapper namespace="mybatis.mappers.boardMapper">
   
-  <select id="selectBoardList" resultType="com.min.app07.dto.BoardDto">
+  <!-- BoardDto의 구조를 이용해 BoardMap을 만듭니다. -->
+  <!-- BoardDto를 반환하지 않고, BoardMap을 반환합니다. -->
+  <!-- resultType 대신 resultMap을 이용해서 반환합니다. -->
+  <resultMap type="com.min.app07.dto.BoardDto" id="BoardMap">
+    <id column="board_id" property="boardId"/>
+    <result column="title" property="title"/>
+    <result column="contents" property="contents"/>
+    <result column="create_dt" property="createDt"/>
+    <association javaType="com.min.app07.dto.UserDto" property="userDto">
+      <id column="usr_id" property="usrId"/>
+      <result column="usr_email" property="usrEmail"/>
+      <result column="usr_name" property="usrName"/>
+    </association>
+  </resultMap>
+  
+  <select id="selectBoardList" resultMap="BoardMap">
     SELECT
            board_id
          , title
          , contents
          , create_dt
-         , usr_id
+         , b.usr_id
+         , usr_email
+         , usr_name
       FROM
-           tbl_board
+           tbl_board b INNER JOIN tbl_user u
+        ON
+           b.usr_id = u.usr_id
      ORDER BY
            board_id DESC
   </select>
