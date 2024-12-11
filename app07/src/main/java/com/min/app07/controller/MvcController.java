@@ -10,9 +10,5 @@ public class MvcController {
   public String main() {
     return "main";
   }
-  @RequestMapping(value={"/board/write.do"})
-  public String write() {
-    return "board/write";
-  }
   
 }
