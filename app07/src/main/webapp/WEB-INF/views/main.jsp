@@ -33,7 +33,7 @@
   
     document.getElementById('gate').addEventListener('click', (event) => {
       alert('입장합니다.');
-      location.href = '${contextPath}/board/write.do';
+      location.href = '${contextPath}/board/list.do';
     })
   
   </script>  
