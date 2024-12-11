@@ -33,7 +33,8 @@
       </div>
       <div class="btn-wrap">
         <button type="button" onclick="fnModify()">수정완료</button>
-        <button type="button" onclick="fnCancel()">작성취소</button>
+        <button type="button" onclick="fnCancel()">수정취소</button>
+        <button type="button" onclick="fnRemove()">삭제하기</button>
       </div>
     </form>
   </div>
@@ -53,6 +54,18 @@
   
     function fnCancel() {
       location.href = '${contextPath}/board/list.do';
+    }
+    
+    function fnRemove() {
+      if(confirm('현재 게시글을 삭제할까요?')) {
+        formDetail.action = '${contextPath}/board/remove.do';
+        formDetail.submit();
+      }
+    }
+    
+    const msg = '${msg}';
+    if(msg !== '') {
+      alert(msg);
     }
     
   </script>
