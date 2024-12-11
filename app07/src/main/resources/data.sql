@@ -38,3 +38,5 @@ SELECT board_id, title, contents, b.usr_id, usr_email, usr_name, create_dt
   FROM tbl_board b INNER JOIN tbl_user u
     ON b.usr_id = u.usr_id
  ORDER BY board_id DESC;
+
+SELECT LAST_INSERT_ID();
