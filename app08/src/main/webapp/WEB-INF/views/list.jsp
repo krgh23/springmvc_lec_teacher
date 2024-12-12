@@ -12,7 +12,7 @@
 </head>
 <body>
 
-  <img src="${contextPath}/resources/logo_coupang.png" width="200px">
+  <img src="${contextPath}/resources/images/logo_coupang.png" width="200px">
   
   <hr/>
 
