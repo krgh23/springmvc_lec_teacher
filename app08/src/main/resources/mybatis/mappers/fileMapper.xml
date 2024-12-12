@@ -3,4 +3,15 @@
 
 <mapper namespace="mybatis.mappers.fileMapper">
   
+  <select id="selectFileList" resultType="FileDto">
+    SELECT file_id, writer, file_path, original_filename, filesystem_name
+      FROM tbl_file
+     ORDER BY file_id DESC
+  </select>
+  
+  <insert id="insertFile" parameterType="FileDto">
+    INSERT INTO tbl_file
+    VALUES (null, #{writer}, #{filePath}, #{originalFilename}, #{filesystemName})
+  </insert>
+  
 </mapper>

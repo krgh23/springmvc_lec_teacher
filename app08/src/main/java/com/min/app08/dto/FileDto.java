@@ -15,6 +15,7 @@ import lombok.ToString;
 @ToString
 public class FileDto {
   private int fileId;
+  private String writer;
   private String filePath;
   private String originalFilename;
   private String filesystemName;
