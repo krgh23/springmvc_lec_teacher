@@ -8,13 +8,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${contextPath}/assets/css/main.css">
+<script src="${contextPath}/assets/js/main.js"></script>
 <title>Welcome</title>
 </head>
 <body>
 
   <h1 id="logo" class="logo">Coupang</h1>
-
-  <script src="${contextPath}/assets/js/main.js"></script>
 
 </body>
 </html>
