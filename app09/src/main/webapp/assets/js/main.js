@@ -19,4 +19,6 @@ function toMain() {
   })
 }
 
-toMain();
+onload = () => {
+  toMain();
+}
