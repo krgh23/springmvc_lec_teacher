@@ -21,6 +21,12 @@
      WHERE notice_id = #{noticeId}
   </select>
   
+  <select id="selectAttachById" parameterType="int" resultType="AttachDto">
+    SELECT attach_id, notice_id, file_path, original_filename, filesystem_name
+      FROM tbl_attach
+     WHERE attach_id = #{attachId}
+  </select>
+  
   <insert id="insertNotice" parameterType="NoticeDto">
     INSERT INTO tbl_notice
     VALUES (null, #{noticeTitle}, #{noticeContents}, NOW())
