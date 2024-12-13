@@ -1,5 +1,7 @@
 package com.min.app09.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +37,12 @@ public class NoticeController {
     return "redirect:/notice/list.do";
   }
   
-  
-  
-  
-  
+  @RequestMapping(value="/detail.do")
+  public String detail(int noticeId, Model model) {
+    Map<String, Object> map = noticeService.getNoticeById(noticeId);
+    model.addAttribute("n", map.get("n"));
+    model.addAttribute("attachList", map.get("attachList"));
+    return "notice/detail";
+  }
   
 }

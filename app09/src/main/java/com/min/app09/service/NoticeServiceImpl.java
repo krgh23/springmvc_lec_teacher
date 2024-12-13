@@ -2,6 +2,7 @@ package com.min.app09.service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,6 +87,12 @@ public class NoticeServiceImpl implements INoticeService {
     
     return "공지사항 등록 성공";
     
+  }
+  
+  @Override
+  public Map<String, Object> getNoticeById(int noticeId) {
+    return Map.of("n", noticeDao.selectNoticeById(noticeId)
+                , "attachList", noticeDao.selectAttachListByNoticeId(noticeId));
   }
 
 }
