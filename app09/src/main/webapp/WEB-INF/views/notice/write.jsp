@@ -66,9 +66,5 @@
   
   </script>
 
-
-
-
-
 </body>
 </html>
