@@ -17,5 +17,17 @@
     <a href="${contextPath}/notice/write.do">새 공지사항 작성하기</a>
   </div>
 
+  <script>
+  
+    function msgHandle() {
+      const msg = '${msg}';
+      if(msg !== '')
+        alert(msg);
+    }
+    
+    msgHandle();
+  
+  </script>
+
 </body>
 </html>

@@ -3,6 +3,9 @@ package com.min.app09.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.min.app09.service.INoticeService;
 
@@ -26,6 +29,11 @@ public class NoticeController {
     return "notice/write";
   }
   
+  @RequestMapping(value="/regist.do", method=RequestMethod.POST)
+  public String regist(MultipartHttpServletRequest multipartRequest, RedirectAttributes redirectAttributes) {
+    redirectAttributes.addFlashAttribute("msg", noticeService.registNotice(multipartRequest));
+    return "redirect:/notice/list.do";
+  }
   
   
   
