@@ -20,7 +20,7 @@
   <div>
     <c:forEach items="${noticeList}" var="n">
       <div class="notices" data-notice-id="${n.noticeId}">
-        공지번호 ${n.noticeId} | ${n.noticeTitle} ... <fmt:formatDate value="${n.createdAt}" pattern="yyyy.MM.dd HH:mm:ss"/>
+        공지번호 ${n.noticeId} | ${n.noticeTitle}(${n.attachCount}) ... <fmt:formatDate value="${n.createdAt}" pattern="yyyy.MM.dd HH:mm:ss"/>
       </div>
     </c:forEach>
   </div>

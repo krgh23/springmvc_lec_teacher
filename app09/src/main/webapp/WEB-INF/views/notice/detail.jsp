@@ -16,7 +16,10 @@
   <div style="background-color: beige;">
     <h4>첨부 파일</h4>
     <c:forEach items="${attachList}" var="a">
-      <div><a href="${contextPath}/notice/download.do?attachId=${a.attachId}" class="download-link">${a.originalFilename}</a></div>
+      <div>
+        <a href="${contextPath}/notice/download.do?attachId=${a.attachId}" class="download-link">${a.originalFilename}</a>
+        <span>Download Count(${a.downloadCount})</span>
+      </div>
     </c:forEach>
   </div>
 

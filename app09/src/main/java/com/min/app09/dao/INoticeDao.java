@@ -13,4 +13,5 @@ public interface INoticeDao {
   int insertNotice(NoticeDto noticeDto);
   int insertAttach(AttachDto attachDto);
   int deleteNotice(int noticeId);
+  int updateAttachDownloadCount(int attachId);
 }
